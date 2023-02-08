@@ -476,6 +476,7 @@ function drawCollectables() {
         collectables[i].y + collectableHeight > platforms[j].y
       ) {
         //bottom of collectable is below top of platform
+        collectables[i].y = collectables[i].y - collectables[i].speedy;
         collectables[i].speedy *= -collectables[i].bounce;
       }
     }

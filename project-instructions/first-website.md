@@ -189,6 +189,7 @@ We've made the structure of the site so now we need some content! Let's move on 
   </details>
   
 <br>
+
 ## **TODO 3:** _Create Sections for the Menu and Main Content_
 
 We're going to create `<div>` tags to group our content together. What is the div tag you may ask?
