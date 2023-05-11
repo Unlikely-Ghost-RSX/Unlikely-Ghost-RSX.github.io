@@ -24,28 +24,62 @@ var background = function (window) {
         
         // container which will be returned
         var background;
-        
-        // ANIMATION VARIABLES HERE:
-        
-     
+        var tree
+        var buildings = []
+        // container which will be returned
+  
+
+        //////////////////////////////////////////////////////////////////
+        // ANIMATION VARIABLES HERE //////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
+        // TODO (several):
+      
+      
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
             background.removeAllChildren();
 
-            // TODO: 2 - Part 2
-            // this fills the background with a obnoxious yellow
-            // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth, canvasHeight, "yellow");
+            // TODO 1:
+            // this currently fills the background with an obnoxious yellow;
+            // you should modify both the height and color to suit your game
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'black');
             background.addChild(backgroundFill);
             
+            // TODO 2: - Add a moon and starfield
+            var moon = draw.bitmap("https://c4.wallpaperflare.com/wallpaper/175/355/754/outrun-silhouette-neon-retro-wallpaper-thumb.jpg");
+            moon.x = 0;
+            moon.y = 0;
+            moon.scaleX = 2.5;
+            moon.scaleY = 1.75;
+            background.addChild(moon);
             // TODO: 3 - Add a moon and starfield
-            
-            
+           
+           
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
-            
+           
+           
             // TODO 4: Part 1 - Add a tree
+            tree = draw.bitmap("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBPKpGuzpd7IZIAQsSsSt3RWGmp--jWccgl7eWzMV_C2nxjoPB_1ATAN_SuP99-DidU4k:https://opengameart.org/sites/default/files/4_69.png&usqp=CAU");
+            tree.x = 2.5;
+            tree.y = 1.75;
+            background.addChild(tree);
+
+
+            for (var i = 0; i < 5; i++) {
+                var buildingHeight = 300 * Math.random();
+                var building = draw.rect(75, buildingHeight, "LightGray", "Black", 1);
+                building.x = 200 * i;
+                building.y = groundY - buildingHeight;
+                background.addChild(building);
+                buildings.push(building);
+              }
+
+            
+            // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
+            
+            
+            // TODO 3: Part 1 - Add a tree
             
             
         } // end of render function - DO NOT DELETE
@@ -59,10 +93,27 @@ var background = function (window) {
             var canvasHeight = app.canvas.height;
             var groundY = ground.y;
             
-            // TODO 4: Part 2 - Move the tree!
+            // TODO 3: Part 2 - Move the tree!
             
-            
+tree.x = tree.x - .5;
+            if (tree.x < -200) {
+                  tree.x = canvasWidth;
+                }
+               
+           
             // TODO 5: Part 2 - Parallax
+            for (var i = 0; i < buildings.length; i++) {
+                var eachElement = buildings[i];
+                eachElement.x = eachElement.x - 1;
+                if (eachElement.x < -200) {
+                      eachElement.x = canvasWidth;
+                    }
+                // code to do something with each element
+              }
+
+
+            
+            // TODO 4: Part 2 - Parallax
             
 
         } // end of update function - DO NOT DELETE
