@@ -12,22 +12,38 @@ var makeLevelData = function (window) {
     var levelData = [
       {
         name: "Robot Romp",
-        number: 1,
+        currentLevel: 1,
         speed: -3,
         gameItems: [
-          { type: "sawblade", x: 400, y: groundY },
-          { type: "sawblade", x: 600, y: groundY },
-          { type: "sawblade", x: 900, y: groundY },
+          { type: "sawblade", x: 500, y: 250 },
+          { type: "sawblade", x: 1500, y: 250 },
+          { type: "sawblade", x: 2500, y: 250 },
+          { type: "reward", x: 3000, y: 250 },
+          { type: "reward", x: 6000, y: 250 },
+          { type: "reward", x: 9000, y: 250 },
+          { type: "enemy", x: 700, y: 250 },
+          { type: "enemy", x: 1300, y: 250 },
+          { type: "enemy", x: 1800, y: 250 },
+          { type: "enemy", x: 1900, y: 250 },
+          { type: "marker", x: 10000, y: 250 },
         ],
       },
       {
         name: "Robot Rampage",
-        number: 2,
+        currentLevel: 2,
         speed: -3,
         gameItems: [
-          { type: "sawblade", x: 400, y: groundY },
-          { type: "sawblade", x: 600, y: groundY },
-          { type: "sawblade", x: 900, y: groundY },
+          { type: "sawblade", x: 500, y: 250 },
+          { type: "sawblade", x: 1500, y: 300 },
+          { type: "sawblade", x: 2500, y: 200 },
+          { type: "reward", x: 3000, y: 250 },
+          { type: "reward", x: 6000, y: 250 },
+          { type: "reward", x: 9000, y: 250 },
+          { type: "enemy", x: 700, y: 250 },
+          { type: "enemy", x: 6000, y: 250 },
+          { type: "enemy", x: 8000, y: 250 },
+          { type: "enemy", x: 3000, y: 250 },
+          { type: "marker", x: 10000, y: 250 },
         ],
       },
     ];
@@ -43,3 +59,5 @@ if (
   // here, export any references you need for tests //
   module.exports = makeLevelData;
 }
+
+

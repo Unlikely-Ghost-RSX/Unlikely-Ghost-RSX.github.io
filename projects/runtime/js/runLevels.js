@@ -28,19 +28,11 @@ sawBladeHitZone.y = y;
 game.addGameItem(sawBladeHitZone);
 var obstacleImage = draw.bitmap("img/sawblade.png");
 sawBladeHitZone.addChild(obstacleImage)
-obstacleImage.x = -25;
-obstacleImage.y = -25;    
+obstacleImage.x = -hitZoneSize;
+obstacleImage.y = -hitZoneSize;    
+
 }
-createSawBlade(900, 178)
-createSawBlade(2600, 280)
-createSawBlade(2000, 178)
-createSawBlade(1800, 178)
-createSawBlade(1300, 280)
-createSawBlade(4000, 178)
-createEnemy(500, groundY - 25);
-createEnemy(3000, groundY - 25);
-createEnemy(6000, groundY - 25);
-createEnemy(9000, groundY - 25);
+
 
 function createEnemy(x,y){
 var enemy = game.createGameItem("enemy", 30);
@@ -59,60 +51,76 @@ enemy.onPlayerCollision = function () {
 }
     
 enemy.onProjectileCollision = function () {
-  game.increaseScore(100);
+  game.increaseScore(2500);
   enemy.fadeOut();
 }
-
+}
 function createReward(x,y){
   var reward = game.createGameItem("reward", 30);
-  var yellowSquare = draw.rect(50, 50, "blue");
-  yellowSquare.x = -90;
-  yellowSquare.y = -25;
-  reward.addChild(yellowSquare);
-  reward.x = x;
-  reward.y = groundY - y;
+  var blueSquare = draw.rect(50, 50, "blue");
+  blueSquare.x = -25;
+  blueSquare.y = -25;
+  reward.addChild(blueSquare);
+  reward.x = x; 
+  reward.y = y;
   game.addGameItem(reward);
-  reward.velocityX = -10;
-  reward.rotationalVelocity = 1000000000;
+  reward.velocityX = -5;
+  reward.rotationalVelocity = 1;
   
   reward.onPlayerCollision = function () {
-    game.changeIntegrity(1000000)
+    game.changeIntegrity(1000)
   }
       
   reward.onProjectileCollision = function () {
-    game.increaseScore(100);
+    game.increaseScore(600);
     reward.fadeOut();
   }
 
 };
 
+function createMarker(x,y){
+  var marker = game.createGameItem("marker", 30);
+  var redSquare = draw.rect(50, 50, "red");
+  redSquare.x = -50;
+  redSquare.y = -50;
+  marker.addChild(redSquare);
+  marker.x = x;
+  marker.y = y;
+  game.addGameItem(marker);
+  marker.velocityX = -10;
+  marker.rotationalVelocity = 1000000000;
+  
+  marker.onPlayerCollision = function () {
+    startLevel();
+  }
+      
+  marker.onProjectileCollision = function () {
+    game.increaseScore(1000);
+    startLevel();
+  }
+
+};
     function startLevel() {
       
 
-      var levelData = [
-  {
-    name: "Robot Romp",
-    number: 1,
-    speed: -3,
-    gameItems: [
-      { type: "sawblade", x: 400, y: groundY },
-      { type: "sawblade", x: 600, y: groundY },
-      { type: "sawblade", x: 900, y: groundY },
-    ],
-  },
-  {
-    name: "Robot Rampage",
-    number: 2,
-    speed: -3,
-    gameItems: [
-      { type: "sawblade", x: 400, y: groundY },
-      { type: "sawblade", x: 600, y: groundY },
-      { type: "sawblade", x: 900, y: groundY },
-    ],
-  },
-];
+          
       // TODO 13 goes below here
-
+      var level = levelData[currentLevel];
+      var levelObjects = level.gameItems;
+      for(var i = 0; i < levelObjects.length; i++){
+        if (levelObjects[i].type === "sawblade"){
+          createSawBlade(levelObjects[i].x, levelObjects[i].y)
+        }
+        if (levelObjects[i].type === "enemy"){
+          createEnemy(levelObjects[i].x, levelObjects[i].y) 
+        }
+        if (levelObjects[i].type === "reward"){
+          createReward(levelObjects[i].x, levelObjects[i].y)
+        }
+        if (levelObjects[i].type === "marker"){
+          createMarker(levelObjects[i].x, levelObjects[i].y)
+        }
+      }
 
 
       //////////////////////////////////////////////
@@ -128,6 +136,7 @@ function createReward(x,y){
   };
 };
 
+
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if (
   typeof process !== "undefined" &&
@@ -136,38 +145,5 @@ if (
   // here, export any references you need for tests //
   module.exports = runLevels;
 }
-}
 
-var levelData = [
-  {
-    name: "Robot Romp",
-    number: 1,
-    speed: -3,
-    gameItems: [
-      { type: "sawblade", x: 400, y: groundY },
-      { type: "sawblade", x: 600, y: groundY },
-      { type: "sawblade", x: 900, y: groundY },
-    ],
-  },
-  {
-    name: "Robot Rampage",
-    number: 2,
-    speed: -3,
-    gameItems: [
-      { type: "sawblade", x: 400, y: groundY },
-      { type: "sawblade", x: 600, y: groundY },
-      { type: "sawblade", x: 900, y: groundY },
-    ],
-  },
-];
-var firstGameItemObject = gameObjects[0];
-var firstX = firstGameItemObject.x;
-var firstY = firstGameItemObject.y;
-var firstType = firstGameItemObject.type;
-createSawBlade(firstX, firstY);
 
-for (var i = 0; i < myArray.length; i++) {
-  var eachElement = myArray[i];
-
-  // code to do something with each element
-}
